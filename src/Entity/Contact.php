@@ -3,7 +3,17 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
+
+// cette classe empeche le formulaire de se valider à vide 
+class Author
+{
+    /**
+     * @Assert\NotBlank
+     */
+    private $name;
+}
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContactRepository")
  */

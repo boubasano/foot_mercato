@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Joueur{% endblock %}
+
+{% block body %}
+    <h1>Joueur</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdJoueur</th>
+                <td>{{ joueur.idJoueur }}</td>
+            </tr>
+            <tr>
+                <th>Civilite</th>
+                <td>{{ joueur.civilite }}</td>
+            </tr>
+            <tr>
+                <th>NomJoueur</th>
+                <td>{{ joueur.nomJoueur }}</td>
+            </tr>
+            <tr>
+                <th>PrenomJoueur</th>
+                <td>{{ joueur.prenomJoueur }}</td>
+            </tr>
+            <tr>
+                <th>EmailJoueur</th>
+                <td>{{ joueur.emailJoueur }}</td>
+            </tr>
+            <tr>
+                <th>PasswordJoueur</th>
+                <td>{{ joueur.passwordJoueur }}</td>
+            </tr>
+            <tr>
+                <th>DatenaissanceJoueur</th>
+                <td>{{ joueur.datenaissanceJoueur ? joueur.datenaissanceJoueur|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>CategorieJoueur</th>
+                <td>{{ joueur.categorieJoueur }}</td>
+            </tr>
+            <tr>
+                <th>PaysJoueur</th>
+                <td>{{ joueur.paysJoueur }}</td>
+            </tr>
+            <tr>
+                <th>VilleJoueur</th>
+                <td>{{ joueur.villeJoueur }}</td>
+            </tr>
+            <tr>
+                <th>ContinentJoueur</th>
+                <td>{{ joueur.continentJoueur }}</td>
+            </tr>
+            <tr>
+                <th>PhotosJoueur</th>
+                <td>{{ joueur.photosJoueur }}</td>
+            </tr>
+            <tr>
+                <th>FavorisJoueur</th>
+                <td>{{ joueur.favorisJoueur }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('joueur_index') }}">back to list</a>
+
+    <a href="{{ path('joueur_edit', {'idJoueur': joueur.idJoueur}) }}">edit</a>
+
+    {{ include('joueur/_delete_form.html.twig') }}
+{% endblock %}

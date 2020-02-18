@@ -5,4 +5,29 @@
 {% block body %}
 <h1>Formulaire de contact</h1>
 {{ form(form) }}
+{# personnalisation de formulaire #}
+
+{# {{ form_start(form) }}
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+    </div>
+
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.nomcontact) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.prenomcontact) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.emailcontact) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.commentairecontact) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.datecontact) }}
+        </div>
+    </div>
+{{ form_end(form) }} #}
 {% endblock %}

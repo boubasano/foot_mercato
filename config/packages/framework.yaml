@@ -14,3 +14,6 @@ framework:
     #fragments: true
     php_errors:
         log: true
+
+    # form validation
+    validation: { enabled: true }
