@@ -24,7 +24,7 @@ class Joueur
     /**
      * @var int
      *
-     * @ORM\Column(name="civilite", type="integer", nullable=false)
+     * @ORM\Column(name="civilite", type="string", length=11, nullable=false)
      */
     private $civilite;
 
