@@ -3,58 +3,54 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Form\ContactType;
+use Symfony\Component\HttpFoundation\Response; 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+// use Symfony\Component\HttpFoundation\RedirectResponse;
 
-// ...
-use Symfony\Component\HttpFoundation\Response;
+// ... permet la validation du formulaire
+
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ContactController extends AbstractController
 {
     /**
-     * @Route("/contact", name="contact")
+     * @Route("/contact", name="contact", methods={"GET","POST"})
      */
     //
     
-     public function addContact()
+     public function addContact(Request $request): Response
     {
-        // je crée un nouvel objet formulaire que j'instencie
+        
+        // j'instencie un nouvel objet qui va contenir les datas en
+        // enregistré par l'utilisateur
         $contact = new Contact();
         
-        $contact->setNomContact('Nom');
-        $contact->setPrenomContact('Prenom');
-        $contact->setEmailContact('Email');
-        $contact->setCommentaireContact('Commentaire');
-        // $contact->setDateContact(new \DateTime('Date'));
-
-        // je fais appel à mon formulaire dejà créé dans ContactType
+        // je declare une variable qui va contenir le formumlaire
+        // créé dans ContactType
         $form = $this->createForm(ContactType::class, $contact);
-
-        $request = Request::createFromGlobals();
-
         $form->handleRequest($request);
+        // $request = Request::createFromGlobals();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-        $data = $form->getData();
-
-    //  // ... perform some action, such as saving the data to the database
-    
-
-    $response = new RedirectResponse('apropos');
-    $response->prepare($request);
-
-    return $response->send();
-}
+        
          
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($contact);
+            $entityManager->flush();
+
+            
+        return $this->redirectToRoute('apropos'); 
+    }
+         
         //create a view
         return $this->render('contact/index.html.twig', [
-            'form' => $form->createView(),
-        ]);
+            'contact' => $contact,
+            'form' => $form->createView(),         
+        ]);     
     }
     // public function index()
     // // {
@@ -64,6 +60,8 @@ class ContactController extends AbstractController
     // // }
 
     // this service validates the form and counts messages errors
+
+
 public function contact(ValidatorInterface $validator)
 {
     $contact = new Contact();

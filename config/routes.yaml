@@ -12,4 +12,4 @@
 
 #contact:
 #    path: /contact
-#    controller: App\Controller\ContactController::index
+#    controller: App\Controller\ContactController::addContact
