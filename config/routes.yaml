@@ -14,6 +14,6 @@
 #    path: /contact
 #    controller: App\Controller\ContactController::addContact
 
-#apropos:
-#    path: /apropos
+#offres:
+#    path: /offres
 #    controller: App\Controller\OffresController::index
