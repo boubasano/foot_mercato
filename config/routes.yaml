@@ -18,3 +18,7 @@
 #    path: /offres
 #    controller: App\Controller\OffresController::index
 
+#joueur:
+#    path: /joueur
+#    controller: App\Controller\InscriptionJoueurController::addJoueur
+
