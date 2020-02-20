@@ -18,6 +18,3 @@
 #    path: /offres
 #    controller: App\Controller\OffresController::index
 
-#inscription:
-#    path: /inscription
-#    controller: App\Controller\InscriptionController::index
