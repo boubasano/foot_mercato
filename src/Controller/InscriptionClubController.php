@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Agent;
-use App\Form\InscriptionAgentType;
+use App\Entity\Club;
+use App\Form\InscriptionClubType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response; 
@@ -14,23 +14,23 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class InscriptionAgentController extends AbstractController
+class InscriptionClubController extends AbstractController
 {
     /**
-     * @Route("/agent", name="agent", methods={"GET","POST"})
+     * @Route("/club", name="club", methods={"GET","POST"})
      */
     //
     
-     public function addAgent(Request $request): Response
+     public function addClub(Request $request): Response
     {
         
         // j'instencie un nouvel objet qui va contenir les datas en
         // enregistré par l'utilisateur
-        $agent = new Agent();
+        $club = new Club();
         
         // je declare une variable qui va contenir le formumlaire
-        // créé dans InscriptionAgentType
-        $form = $this->createForm(InscriptionAgentType::class, $agent);
+        // créé dans InscriptionClubType
+        $form = $this->createForm(InscriptionClubType::class, $club);
         $form->handleRequest($request);
         // $request = Request::createFromGlobals();
 
@@ -39,7 +39,7 @@ class InscriptionAgentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($agent);
+            $entityManager->persist($club);
             $entityManager->flush();
 
             
@@ -47,8 +47,8 @@ class InscriptionAgentController extends AbstractController
     }
          
         //create a view
-        return $this->render('inscriptionagent/index.html.twig', [
-            'agent' => $agent,
+        return $this->render('inscriptionclub/index.html.twig', [
+            'club' => $club,
             'form' => $form->createView(),         
         ]);     
     }
@@ -62,13 +62,13 @@ class InscriptionAgentController extends AbstractController
     // this service validates the form and counts messages errors
 
 
-public function agent(ValidatorInterface $validator)
+public function club(ValidatorInterface $validator)
 {
-    $agent = new Agent();
+    $club = new Club();
 
     // ... do something to the $contact object
 
-    $errors = $validator->validate($agent);
+    $errors = $validator->validate($club);
 
     if (count($errors) > 0) {
         /*

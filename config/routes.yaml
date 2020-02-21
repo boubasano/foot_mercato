@@ -25,3 +25,8 @@
 #agent:
 #    path: /agent
 #    controller: App\Controller\InscriptionAgentController::addAgent
+
+#club:
+#    path: /club
+#    controller: App\Controller\InscriptionClubController::addClub
+
