@@ -32,7 +32,7 @@ class Joueur
     /**
      * @var string
      *
-     * @ORM\Column(name="nom_joueur", type="string", length=250)
+     * @ORM\Column(name="nom_joueur", type="string", length=50)
      */
     private $nom_joueur;
 

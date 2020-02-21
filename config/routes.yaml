@@ -22,3 +22,6 @@
 #    path: /joueur
 #    controller: App\Controller\InscriptionJoueurController::addJoueur
 
+#agent:
+#    path: /agent
+#    controller: App\Controller\InscriptionAgentController::addAgent

@@ -2,27 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\Joueur;
+use App\Entity\Agent;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class InscriptionJoueurType extends AbstractType
+class InscriptionAgentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         //form creation with elements
 
         $builder        
-            ->add('nomjoueur')
-            ->add('prenomjoueur')
-            ->add('emailjoueur')
-            ->add('passwordjoueur', PasswordType::class)            
-            ->add('paysjoueur')
-            ->add('villejoueur')
-            ->add('continentjoueur')
+            ->add('nomagent')
+            ->add('prenomagent')
+            ->add('emailagent')
+            ->add('passwordagent', PasswordType::class)            
+            ->add('paysagent')
+            ->add('villeagent')
+            ->add('continentagent')
             ->add('save', SubmitType::class)
         ;
     }
@@ -30,7 +30,7 @@ class InscriptionJoueurType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Joueur::class,
+            'data_class' => Agent::class,
         ]);
     }
 }
