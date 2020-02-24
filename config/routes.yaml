@@ -34,4 +34,9 @@
 #    path: /fichesjoueur
 #    controller: App\Controller\FichesJoueurController::index
 
+#app_login:
+#    path: /login
+#    controller: App\Controller\SecurityController::login
+
+
 
