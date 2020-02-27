@@ -10,9 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 // use Symfony\Component\HttpFoundation\RedirectResponse;
 
-// ... permet la validation du formulaire
-
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class InscriptionJoueurController extends AbstractController
 {
@@ -61,28 +58,8 @@ class InscriptionJoueurController extends AbstractController
 
     // this service validates the form and counts messages errors
 
+    
 
-public function joueur(ValidatorInterface $validator)
-{
-    $joueur = new Joueur();
-
-    // ... do something to the $contact object
-
-    $errors = $validator->validate($joueur);
-
-    if (count($errors) > 0) {
-        /*
-         * Uses a __toString method on the $errors variable which is a
-         * ConstraintViolationList object. This gives us a nice string
-         * for debugging.
-         */
-        $errorsString = (string) $errors;
-
-        return new Response($errorsString);
-    }
-
-    return new Response('The author is valid! Yes!');
-}
 
 }
 

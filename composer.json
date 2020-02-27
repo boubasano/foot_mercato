@@ -5,6 +5,7 @@
         "php": "^7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "friendsofphp/php-cs-fixer": "^2.16",
         "sensio/framework-extra-bundle": "^5.5",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "5.0.*",
@@ -35,6 +36,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "squizlabs/php_codesniffer": "^3.5",
         "symfony/debug-pack": "*",
         "symfony/test-pack": "*"
     },

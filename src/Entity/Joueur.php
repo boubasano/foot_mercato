@@ -5,11 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-// cette classe empeche le formulaire de se valider à vide 
+// cette classe permet de gerer les contraintes  de validation 
 class AuthorJoueur
 {
     /**
      * @Assert\NotBlank
+     * 
      */
     private $name;
 }
@@ -54,8 +55,17 @@ class Joueur
      * @var string
      *
      * @ORM\Column(name="password_joueur", type="string", length=250)
+     * @Assert\Length(min="5", minMessage="Votre mot de passe doit avoir 8 caractères minimum")
+     * @Assert\EqualTo(propertyPath="confirm_password_joueur")
      */
     private $password_joueur;
+
+     /**
+     * @var string
+     * 
+     * @Assert\EqualTo(propertyPath="password_joueur")
+     */
+    public $confirm_password_joueur;
 
     // /**
     //  * @var \DateTime
@@ -155,6 +165,18 @@ class Joueur
     public function setPasswordJoueur(string $password_joueur): self
     {
         $this->password_joueur = $password_joueur;
+
+        return $this;
+    }
+
+    public function getConfirmPasswordJoueur(): ?string
+    {
+        return $this->confirm_password_joueur;
+    }
+
+    public function setConfirmPasswordJoueur(string $password_joueur): self
+    {
+        $this->confirm_password_joueur = $password_joueur;
 
         return $this;
     }
