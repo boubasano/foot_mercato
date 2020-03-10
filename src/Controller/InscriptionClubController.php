@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response; 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 // use Symfony\Component\HttpFoundation\RedirectResponse;
 
 // ... permet la validation du formulaire
@@ -21,7 +22,7 @@ class InscriptionClubController extends AbstractController
      */
     //
     
-     public function addClub(Request $request): Response
+     public function addClub(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
         
         // j'instencie un nouvel objet qui va contenir les datas en
@@ -39,6 +40,10 @@ class InscriptionClubController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            $encoded = $encoder->encodePassword($club, $club->getPasswordClub());
+
+            $club->setPasswordClub($encoded);
             $entityManager->persist($club);
             $entityManager->flush();
 

@@ -8,8 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response; 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 // use Symfony\Component\HttpFoundation\RedirectResponse;
 
+// ... permet la validation du formulaire si les contraintes sont respectées
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class InscriptionJoueurController extends AbstractController
 {
@@ -18,7 +21,7 @@ class InscriptionJoueurController extends AbstractController
      */
     //
     
-     public function addJoueur(Request $request): Response
+     public function addJoueur(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
         
         // j'instencie un nouvel objet qui va contenir les datas en
@@ -32,10 +35,14 @@ class InscriptionJoueurController extends AbstractController
         // $request = Request::createFromGlobals();
 
         
-         
+        //  validation de l'envoi de données et son enregistrement dans la base de données 
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            
+            $encoded = $encoder->encodePassword($joueur, $joueur->getPasswordJoueur());
+
+            $joueur->setPasswordJoueur($encoded);
             $entityManager->persist($joueur);
             $entityManager->flush();
 
@@ -57,8 +64,27 @@ class InscriptionJoueurController extends AbstractController
     // // }
 
     // this service validates the form and counts messages errors
+    public function joueur(ValidatorInterface $validator)
+{
+    $joueur = new Joueur();
 
-    
+    // ... do something to the $contact object
+
+    $errors = $validator->validate($joueur);
+
+    if (count($errors) > 0) {
+        /*
+         * Uses a __toString method on the $errors variable which is a
+         * ConstraintViolationList object. This gives us a nice string
+         * for debugging.
+         */
+        $errorsString = (string) $errors;
+
+        return new Response($errorsString);
+    }
+
+    return new Response('The author is valid! Yes!');
+}
 
 
 }

@@ -3,116 +3,53 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
-// cette classe empeche le formulaire de se valider à vide 
-class AuthorAgent
-{
-    /**
-     * @Assert\NotBlank
-     */
-    private $name;
-}
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AgentRepository")
  */
-
-
 class Agent
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_agent", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private $id_agent;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="nom_agent", type="string", length=50)
+     * @ORM\Column(type="string", length=255)
      */
     private $nom_agent;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="prenom_agent", type="string", length=250)
+     * @ORM\Column(type="string", length=255)
      */
     private $prenom_agent;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="email_agent", type="string", length=250)
+     * @ORM\Column(type="string", length=255)
      */
     private $email_agent;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="password_agent", type="string", length=250)
+     * @ORM\Column(type="string", length=255)
      */
     private $password_agent;
 
-    // /**
-    //  * @var \DateTime
-    //  *
-    //  * @ORM\Column(name="age_agent", type="date", nullable=false)
-    //  */
-    // private $ageAgent;
-
     /**
-     * @var string
-     *
-     * @ORM\Column(name="pays_agent", type="string", length=250)
+     * @ORM\Column(type="string", length=255)
      */
     private $pays_agent;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="ville_agent", type="string", length=250)
+     * @ORM\Column(type="string", length=255)
      */
     private $ville_agent;
 
-
     /**
-     * @var string
-     *
-     * @ORM\Column(name="continent_agent", type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $continent_agent;
-
-    // /**
-    //  * @var string
-    //  *
-    //  * @ORM\Column(name="photo_agent", type="string", length=50, nullable=false)
-    //  */
-    // private $photoAgent;
-
-    // /**
-    //  * @var string
-    //  *
-    //  * @ORM\Column(name="diplome_agent", type="string", length=50, nullable=false)
-    //  */
-    // private $diplomeAgent;
-
-    // /**
-    //  * @var int
-    //  *
-    //  * @ORM\Column(name="immatriculation_agent", type="integer", nullable=false)
-    //  */
-    // private $immatriculationAgent;
-
-    // /**
-    //  * @var string
-    //  *
-    //  * @ORM\Column(name="favoris_agent", type="string", length=250, nullable=false)
-    //  */
-    // private $favorisAgent;
 
     public function getIdAgent(): ?int
     {
@@ -167,18 +104,6 @@ class Agent
         return $this;
     }
 
-     public function getDatenaissanceAgent(): ?\DateTimeInterface
-    {
-        return $this->datenaissance_agent;
-    }
-
-    public function setDatenaissanceAgent(\DateTimeInterface $datenaissance_agent): self
-    {
-        $this->datenaissance_agent = $datenaissance_agent;
-
-        return $this;
-    }
-    
     public function getPaysAgent(): ?string
     {
         return $this->pays_agent;
@@ -208,37 +133,10 @@ class Agent
         return $this->continent_agent;
     }
 
-    public function setContinentagent(string $continent_agent): self
+    public function setContinentAgent(string $continent_agent): self
     {
         $this->continent_agent = $continent_agent;
 
         return $this;
     }
-
-    public function getPhotosAgent(): ?string
-    {
-        return $this->photos_agent;
-    }
-
-    public function setPhotosAgent(string $photos_agent): self
-    {
-        $this->photos_agent = $photos_agent;
-
-        return $this;
-    }
-
-    public function getFavorisAgent(): ?string
-    {
-        return $this->favoris_agent;
-    }
-
-    public function setFavorisAgent(string $favoris_agent): self
-    {
-        $this->favoris_agent = $favoris_agent;
-
-        return $this;
-    }
-
-
-
 }

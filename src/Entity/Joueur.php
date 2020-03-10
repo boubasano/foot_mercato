@@ -3,118 +3,63 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-
-// cette classe permet de gerer les contraintes  de validation 
-class AuthorJoueur
-{
-    /**
-     * @Assert\NotBlank
-     * 
-     */
-    private $name;
-}
+use Symfony\Component\Validator\Constraints\EqualTo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\JoueurRepository")
  */
-class Joueur
+class Joueur implements UserInterface
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_joueur", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private $id_joueur;
 
-    
     /**
-     * @var string
-     *
-     * @ORM\Column(name="nom_joueur", type="string", length=50)
+     * @ORM\Column(type="string", length=255)
      */
     private $nom_joueur;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="prenom_joueur", type="string", length=250)
+     * @ORM\Column(type="string", length=255)
      */
     private $prenom_joueur;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="email_joueur", type="string", length=250)
+     * @ORM\Column(type="string", length=255)
      */
     private $email_joueur;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="password_joueur", type="string", length=250)
-     * @Assert\Length(min="5", minMessage="Votre mot de passe doit avoir 8 caractères minimum")
-     * @Assert\EqualTo(propertyPath="confirm_password_joueur")
+     * @ORM\Column(type="string", length=255)
+     
      */
     private $password_joueur;
 
-     /**
-     * @var string
-     * 
-     * @Assert\EqualTo(propertyPath="password_joueur")
+    /**
+     * @Assert\EqualTo(propertyPath="password_joueur", message="veuillez entrez le même mot de passe")
      */
-    public $confirm_password_joueur;
+    private $confirm_password_joueur;
 
-    // /**
-    //  * @var \DateTime
-    //  *
-    //  * @ORM\Column(name="datenaissance_joueur", type="date")
-    //  */
-    // private $datenaissance_joueur;
-
-    // /**
-    //  * @var string
-    //  *
-    //  * @ORM\Column(name="categorie_joueur", type="string", length=50)
-    //  */
-    // private $categorie_joueur;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="pays_joueur", type="string", length=250)
+     * @ORM\Column(type="string", length=255)
      */
     private $pays_joueur;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="ville_joueur", type="string", length=250)
+     * @ORM\Column(type="string", length=255)
      */
     private $ville_joueur;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="continent_joueur", type="string", length=250)
+     * @ORM\Column(type="string", length=255)
      */
     private $continent_joueur;
-
-    // /**
-    //  * @var string
-    //  *
-    //  * @ORM\Column(name="photos_joueur", type="string", length=50)
-    //  */
-    // private $photos_joueur;
-
-    // // /**
-    // //  * @var string
-    // //  *
-    // //  * @ORM\Column(name="favoris_joueur", type="string", length=250)
-    // //  */
-    // // private $favoris_joueur;
 
     public function getIdJoueur(): ?int
     {
@@ -162,6 +107,11 @@ class Joueur
         return $this->password_joueur;
     }
 
+    public function getConfirmPasswordJoueur(): ?string
+    {
+        return $this->confirm_password_joueur;
+    }
+
     public function setPasswordJoueur(string $password_joueur): self
     {
         $this->password_joueur = $password_joueur;
@@ -169,42 +119,13 @@ class Joueur
         return $this;
     }
 
-    public function getConfirmPasswordJoueur(): ?string
+    public function setConfirmPasswordJoueur(string $confirm_password_joueur): self
     {
-        return $this->confirm_password_joueur;
-    }
-
-    public function setConfirmPasswordJoueur(string $password_joueur): self
-    {
-        $this->confirm_password_joueur = $password_joueur;
+        $this->confirm_password_joueur = $confirm_password_joueur;
 
         return $this;
     }
 
-     public function getDatenaissanceJoueur(): ?\DateTimeInterface
-    {
-        return $this->datenaissance_joueur;
-    }
-
-    public function setDateContact(\DateTimeInterface $datenaissance_joueur): self
-    {
-        $this->datenaissance_joueur = $datenaissance_joueur;
-
-        return $this;
-    }
-
-    public function getCategorieJoueur(): ?string
-    {
-        return $this->categorie_joueur;
-    }
-
-    public function setCategorieJoueur(string $categorie_joueur): self
-    {
-        $this->categorie_joueur = $categorie_joueur;
-
-        return $this;
-    }
-    
     public function getPaysJoueur(): ?string
     {
         return $this->pays_joueur;
@@ -241,34 +162,64 @@ class Joueur
         return $this;
     }
 
-    public function getPhotosJoueur(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
     {
-        return $this->photos_joueur;
+        return (string) $this->email;
     }
 
-    public function setPhotosJoueur(string $photos_joueur): self
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        $this->photos_joueur = $photos_joueur;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }
 
-    public function getFavorisJoueur(): ?string
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
     {
-        return $this->favoris_joueur;
+        return (string) $this->password;
     }
 
-    public function setFavorisJoueur(string $favoris_joueur): self
+    public function setPassword(string $password): self
     {
-        $this->favoris_joueur = $favoris_joueur;
+        $this->password = $password;
 
         return $this;
     }
 
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
 
-
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
 }
-
-    
-
-    

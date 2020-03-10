@@ -1,7 +1,19 @@
 security:
     encoders:
+        App\Entity\Joueur:
+            algorithm: auto
+        App\Entity\Club:
+            algorithm: auto
+        App\Entity\Agent:
+            algorithm: auto
         App\Entity\User:
             algorithm: auto
+
+
+        # access_control:
+        #  { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
@@ -10,17 +22,26 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+        # used to reload user from session & other features (e.g. switch_user)
+        # used to reload user from session & other features (e.g. switch_user)
+        # used to reload user from session & other features (e.g. switch_user)
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: lazy
+            anonymous: true
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
             logout:
                 path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
+    #         guard:
+    #             authenticators:
+    #                 - App\Security\ConnexionAuthenticator
+    #         
                 # where to redirect after logout
                 # target: app_any_route
 

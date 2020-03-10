@@ -3,93 +3,57 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-// cette classe empeche le formulaire de se valider à vide 
-class AuthorClub
-{
-    /**
-     * @Assert\NotBlank
-     */
-    private $name;
-}
+use Symfony\Component\Validator\Constraints\EqualTo;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ClubRepository")
  */
-
-class Club
+class Club implements UserInterface
 {
+
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_club", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private $id_club;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="nom_club", type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $nom_club;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="pays_club", type="string", length=250, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $pays_club;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="ville_club", type="string", length=250, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $ville_club;
 
-    // /**
-    //  * @var string
-    //  *
-    //  * @ORM\Column(name="embleme_club", type="string", length=50, nullable=false)
-    //  */
-    // private $embleme_club;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $continent_club;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="email_club", type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $email_club;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="password_club", type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $password_club;
 
-    // /**
-    //  * @var string
-    //  *
-    //  * @ORM\Column(name="favoris_club", type="string", length=250, nullable=false)
-    //  */
-    // private $favoris_club;
-
     /**
-     * @var string
-     *
-     * @ORM\Column(name="continent_club", type="string", length=50, nullable=false)
+     * @Assert\EqualTo(propertyPath="password_club", message="veuillez entrez le même mot de passe")
      */
-    private $continent_club;
-
-    // /**
-    //  * @var string
-    //  *
-    //  * @ORM\Column(name="photos_club", type="string", length=50, nullable=false)
-    //  */
-    // private $photos_club;
-
+    private $confirm_password_club;
 
     public function getIdClub(): ?int
     {
@@ -108,42 +72,6 @@ class Club
         return $this;
     }
 
-    // public function getEmblemeClub(): ?string
-    // {
-    //     return $this->embleme_club;
-    // }
-
-    // public function setEmblemeClub(string $embleme_club): self
-    // {
-    //     $this->embleme_club = $embleme_club;
-
-    //     return $this;
-    // }
-
-    public function getEmailClub(): ?string
-    {
-        return $this->email_club;
-    }
-
-    public function setEmailClub(string $email_club): self
-    {
-        $this->email_club = $email_club;
-
-        return $this;
-    }
-
-    public function getPasswordClub(): ?string
-    {
-        return $this->password_club;
-    }
-
-    public function setPasswordClub(string $password_club): self
-    {
-        $this->password_club = $password_club;
-
-        return $this;
-    }
-    
     public function getPaysClub(): ?string
     {
         return $this->pays_club;
@@ -173,35 +101,107 @@ class Club
         return $this->continent_club;
     }
 
-    public function setContinentclub(string $continent_club): self
+    public function setContinentClub(string $continent_club): self
     {
         $this->continent_club = $continent_club;
 
         return $this;
     }
 
-    // public function getPhotosClub(): ?string
-    // {
-    //     return $this->photos_club;
-    // }
+    public function getEmailClub(): ?string
+    {
+        return $this->email_club;
+    }
 
-    // public function setPhotosClub(string $photos_club): self
-    // {
-    //     $this->photos_club = $photos_club;
+    public function setEmailClub(string $email_club): self
+    {
+        $this->email_club = $email_club;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function getFavorisClub(): ?string
-    // {
-    //     return $this->favoris_club;
-    // }
+    public function getPasswordClub(): ?string
+    {
+        return $this->password_club;
+    }
 
-    // public function setFavorisClub(string $favoris_club): self
-    // {
-    //     $this->favoris_club = $favoris_club;
+     public function getConfirmPasswordClub(): ?string
+    {
+        return $this->confirm_password_club;
+    }
 
-    //     return $this;
-    // }
+    public function setPasswordClub(string $password_club): self
+    {
+        $this->password_club = $password_club;
 
+        return $this;
+    }
+
+     public function setConfirmePasswordClub(string $confirm_password_club): self
+    {
+        $this->confirm_password_club = $confirm_password_club;
+
+        return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return (string) $this->password;
+    }
+// 
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
 }

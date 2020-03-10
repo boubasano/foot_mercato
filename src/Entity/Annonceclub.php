@@ -5,49 +5,87 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Annonceclub
- *
- * @ORM\Table(name="annonceclub")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\AnnonceClubRepository")
  */
-class Annonceclub
+class AnnonceClub
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_annonceclub", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
-    private $idAnnonceclub;
+    private $id_annonceclub;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="intitule_annonceclub", type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $intituleAnnonceclub;
+    private $intitule_annonceclub;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="type_annonceclub", type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $typeAnnonceclub;
+    private $type_annonceclub;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_annonceclub", type="date", nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $dateAnnonceclub;
+    private $date_annonceclub;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="centre_id", type="integer", nullable=false)
+     * @ORM\Column(type="integer")
      */
-    private $centreId;
+    private $centre_id;
 
+    public function getIdAnnonceclub(): ?int
+    {
+        return $this->id_annonceclub;
+    }
 
+    public function getIntituleAnnonceclub(): ?string
+    {
+        return $this->intitule_annonceclub;
+    }
+
+    public function setIntituleAnnonceclub(string $intitule_annonceclub): self
+    {
+        $this->intitule_annonceclub = $intitule_annonceclub;
+
+        return $this;
+    }
+
+    public function getTypeAnnonceclub(): ?string
+    {
+        return $this->type_annonceclub;
+    }
+
+    public function setTypeAnnonceclub(string $type_annonceclub): self
+    {
+        $this->type_annonceclub = $type_annonceclub;
+
+        return $this;
+    }
+
+    public function getDateAnnonceclub(): ?string
+    {
+        return $this->date_annonceclub;
+    }
+
+    public function setDateAnnonceclub(string $date_annonceclub): self
+    {
+        $this->date_annonceclub = $date_annonceclub;
+
+        return $this;
+    }
+
+    public function getCentreId(): ?int
+    {
+        return $this->centre_id;
+    }
+
+    public function setCentreId(int $centre_id): self
+    {
+        $this->centre_id = $centre_id;
+
+        return $this;
+    }
 }

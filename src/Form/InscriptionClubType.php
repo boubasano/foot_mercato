@@ -8,6 +8,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+
 
 class InscriptionClubType extends AbstractType
 {
@@ -16,12 +19,13 @@ class InscriptionClubType extends AbstractType
         //form creation with elements
 
         $builder        
-            ->add('nomclub')
-            ->add('emailclub')
-            ->add('passwordclub', PasswordType::class)            
-            ->add('paysclub')
-            ->add('villeclub')
-            ->add('continentclub')
+            ->add('nomclub', TextType::class)
+            ->add('emailclub', EmailType::class)
+            ->add('passwordclub', PasswordType::class) 
+            ->add('confirm_passwordclub', PasswordType::class)           
+            ->add('paysclub', TextType::class)
+            ->add('villeclub', TextType::class)
+            ->add('continentclub', TextType::class)
             ->add('save', SubmitType::class)
         ;
     }

@@ -5,49 +5,87 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Statut
- *
- * @ORM\Table(name="statut")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\StatutRepository")
  */
 class Statut
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_statut", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
-    private $idStatut;
+    private $id_statut;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="statut", type="string", length=25, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $statut;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="player_id", type="integer", nullable=false)
+     * @ORM\Column(type="integer")
      */
-    private $playerId;
+    private $player_id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="agent_id", type="integer", nullable=false)
+     * @ORM\Column(type="integer")
      */
-    private $agentId;
+    private $agent_id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="centre_id", type="integer", nullable=false)
+     * @ORM\Column(type="integer")
      */
-    private $centreId;
+    private $centre_id;
 
+    public function getIdStatut(): ?int
+    {
+        return $this->id_statut;
+    }
 
+    public function getStatut(): ?string
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(string $statut): self
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getPlayerId(): ?int
+    {
+        return $this->player_id;
+    }
+
+    public function setPlayerId(int $player_id): self
+    {
+        $this->player_id = $player_id;
+
+        return $this;
+    }
+
+    public function getAgentId(): ?int
+    {
+        return $this->agent_id;
+    }
+
+    public function setAgentId(int $agent_id): self
+    {
+        $this->agent_id = $agent_id;
+
+        return $this;
+    }
+
+    public function getCentreId(): ?int
+    {
+        return $this->centre_id;
+    }
+
+    public function setCentreId(int $centre_id): self
+    {
+        $this->centre_id = $centre_id;
+
+        return $this;
+    }
 }

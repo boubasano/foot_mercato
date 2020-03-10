@@ -10,8 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 // use Symfony\Component\HttpFoundation\RedirectResponse;
 
-// ... permet la validation du formulaire
-
+// ... permet la validation du formulaire si les contraintes sont respectées
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ContactController extends AbstractController
@@ -62,7 +61,7 @@ class ContactController extends AbstractController
     // this service validates the form and counts messages errors
 
 
-public function contact(ValidatorInterface $validator)
+    public function contact(ValidatorInterface $validator)
 {
     $contact = new Contact();
 

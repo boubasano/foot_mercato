@@ -5,30 +5,28 @@
 {% block body %}
 <h1>Inscription</h1>
 <h4> Section Agent</h4> 
- {{ form(form) }}
+{# {{ form(form) }} #}
 {# personnalisation de formulaire #}
 
-{# {{ form_start(form) }}
-    <div class="my-custom-class-for-errors">
-        {{ form_errors(form) }}
-    </div>
-
-    <div class="row">
-        <div class="col">
-            {{ form_row(form.nomcontact) }}
-        </div>
-        <div class="col">
-            {{ form_row(form.prenomcontact) }}
-        </div>
-        <div class="col">
-            {{ form_row(form.emailcontact) }}
-        </div>
-        <div class="col">
-            {{ form_row(form.commentairecontact) }}
-        </div>
-        <div class="col">
-            {{ form_row(form.datecontact) }}
-        </div>
-    </div>
-{{ form_end(form) }} #}
+{{ form_start(form) }}
+    
+        {{ form_errors(form) }}  
+        {{ form_row(form.nomagent, {'label':'Nom', 'attr':
+                                    {'placeholder':'Nom...'}}) }}           
+        {{ form_row(form.prenomagent, {'label':'Prenom', 'attr':
+                                    {'placeholder':'Prenom...'}}) }}    
+        {{ form_row(form.emailagent, {'label':'Email', 'attr':
+                                    {'placeholder':'Email...'}}) }}
+        {{ form_row(form.passwordagent, {'label':'Mot de passe', 'attr':
+                                    {'placeholder':'Mot de passe...'}}) }}
+        {{ form_row(form.confirm_passwordagent, {'label':'Confirmez Mot de passe', 'attr':
+                                    {'placeholder':'Confirmez mot de passe...'}}) }}
+        {{ form_row(form.paysagent, {'label':'Pays', 'attr':
+                                    {'placeholder':'Pays...'}}) }}            
+        {{ form_row(form.villeagent, {'label':'Ville', 'attr':
+                                    {'placeholder':'Ville...'}}) }}           
+        {{ form_row(form.continentagent, {'label':'Continent', 'attr':
+                                    {'placeholder':'Continent...'}}) }}  
+                   
+{{ form_end(form) }}
 {% endblock %}

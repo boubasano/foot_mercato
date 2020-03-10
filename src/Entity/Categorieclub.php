@@ -5,42 +5,70 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Categorieclub
- *
- * @ORM\Table(name="categorieclub")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\CategorieClubRepository")
  */
-class Categorieclub
+class CategorieClub
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_categorie", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
-    private $idCategorie;
+    private $id_categorieclub;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="niveau", type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $niveau;
+    private $niveu;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $type;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="centre_id", type="integer", nullable=false)
+     * @ORM\Column(type="integer")
      */
-    private $centreId;
+    private $centre_id;
 
+    public function getIdCategorieClub(): ?int
+    {
+        return $this->id_categorieclub;
+    }
 
+    public function getNiveu(): ?string
+    {
+        return $this->niveu;
+    }
+
+    public function setNiveu(string $niveu): self
+    {
+        $this->niveu = $niveu;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getCentreId(): ?int
+    {
+        return $this->centre_id;
+    }
+
+    public function setCentreId(int $centre_id): self
+    {
+        $this->centre_id = $centre_id;
+
+        return $this;
+    }
 }

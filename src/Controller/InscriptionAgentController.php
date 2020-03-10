@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response; 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 // use Symfony\Component\HttpFoundation\RedirectResponse;
 
 // ... permet la validation du formulaire
@@ -21,7 +22,7 @@ class InscriptionAgentController extends AbstractController
      */
     //
     
-     public function addAgent(Request $request): Response
+     public function addAgent(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
         
         // j'instencie un nouvel objet qui va contenir les datas en
@@ -39,6 +40,10 @@ class InscriptionAgentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            $encoded = $encoder->encodePassword($agent, $agent->getPasswordAgent());
+
+            $agent->setPasswordAgent($encoded);
             $entityManager->persist($agent);
             $entityManager->flush();
 

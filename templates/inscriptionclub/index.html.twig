@@ -5,30 +5,26 @@
 {% block body %}
 <h1>Inscription</h1>
 <h4> Section Club</h4>
-{{ form(form) }}
+{# {{ form(form) }} #}
 {# personnalisation de formulaire #}
 
-{# {{ form_start(form) }}
-    <div class="my-custom-class-for-errors">
-        {{ form_errors(form) }}
-    </div>
-
-    <div class="row">
-        <div class="col">
-            {{ form_row(form.nomcontact) }}
-        </div>
-        <div class="col">
-            {{ form_row(form.prenomcontact) }}
-        </div>
-        <div class="col">
-            {{ form_row(form.emailcontact) }}
-        </div>
-        <div class="col">
-            {{ form_row(form.commentairecontact) }}
-        </div>
-        <div class="col">
-            {{ form_row(form.datecontact) }}
-        </div>
-    </div>
-{{ form_end(form) }} #}
+{{ form_start(form) }}
+    
+        {{ form_errors(form) }}  
+        {{ form_row(form.nomclub, {'label':'Nom', 'attr':
+                                    {'placeholder':'Nom...'}}) }}               
+        {{ form_row(form.emailclub, {'label':'Email', 'attr':
+                                    {'placeholder':'Email...'}}) }}
+        {{ form_row(form.passwordclub, {'label':'Mot de passe', 'attr':
+                                    {'placeholder':'Mot de passe...'}}) }}
+         {{ form_row(form.confirm_passwordclub, {'label':'Confirmez Mot de passe', 'attr':
+                                    {'placeholder':'Confirmez mot de passe...'}}) }}
+        {{ form_row(form.paysclub, {'label':'Pays', 'attr':
+                                    {'placeholder':'Pays...'}}) }}            
+        {{ form_row(form.villeclub, {'label':'Ville', 'attr':
+                                    {'placeholder':'Ville...'}}) }}           
+        {{ form_row(form.continentclub, {'label':'Continent', 'attr':
+                                    {'placeholder':'Continent...'}}) }}  
+                   
+{{ form_end(form) }}
 {% endblock %}

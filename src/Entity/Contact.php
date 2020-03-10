@@ -3,17 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
-
-// cette classe empeche le formulaire de se valider à vide 
-class Author
-{
-    /**
-     * @Assert\NotBlank
-     */
-    private $name;
-}
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContactRepository")
  */
@@ -24,8 +14,7 @@ class Contact
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
-
+    private $id_contact;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -48,13 +37,13 @@ class Contact
     private $commentaire_contact;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $date_contact;
 
-    public function getId(): ?int
+    public function getIdContact(): ?int
     {
-        return $this->id;
+        return $this->id_contact;
     }
 
     public function getNomContact(): ?string

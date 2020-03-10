@@ -5,49 +5,87 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Annonceagent
- *
- * @ORM\Table(name="annonceagent")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\AnnonceAgentRepository")
  */
-class Annonceagent
+class AnnonceAgent
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_annonceagent", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
-    private $idAnnonceagent;
+    private $id_annonceagent;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="intitule_annonceagent", type="integer", nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $intituleAnnonceagent;
+    private $intitule_annonceagent;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="type_annonceagent", type="integer", nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
-    private $typeAnnonceagent;
+    private $type_annonceagent;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_annonceagent", type="date", nullable=false)
+     * @ORM\Column(type="datetime")
      */
-    private $dateAnnonceagent;
+    private $date_annonceagent;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="agent_id", type="integer", nullable=false)
+     * @ORM\Column(type="integer")
      */
-    private $agentId;
+    private $agent_id;
 
+    public function getIdAnnonceagent(): ?int
+    {
+        return $this->id_annonceagent;
+    }
 
+    public function getIntituleAnnonceagent(): ?string
+    {
+        return $this->intitule_annonceagent;
+    }
+
+    public function setIntituleAnnonceagent(string $intitule_annonceagent): self
+    {
+        $this->intitule_annonceagent = $intitule_annonceagent;
+
+        return $this;
+    }
+
+    public function getTypeAnnonceagent(): ?string
+    {
+        return $this->type_annonceagent;
+    }
+
+    public function setTypeAnnonceagent(string $type_annonceagent): self
+    {
+        $this->type_annonceagent = $type_annonceagent;
+
+        return $this;
+    }
+
+    public function getDateAnnonceagent(): ?\DateTimeInterface
+    {
+        return $this->date_annonceagent;
+    }
+
+    public function setDateAnnonceagent(\DateTimeInterface $date_annonceagent): self
+    {
+        $this->date_annonceagent = $date_annonceagent;
+
+        return $this;
+    }
+
+    public function getAgentId(): ?int
+    {
+        return $this->agent_id;
+    }
+
+    public function setAgentId(int $agent_id): self
+    {
+        $this->agent_id = $agent_id;
+
+        return $this;
+    }
 }
