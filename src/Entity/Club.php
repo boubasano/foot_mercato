@@ -137,7 +137,7 @@ class Club implements UserInterface
         return $this;
     }
 
-     public function setConfirmePasswordClub(string $confirm_password_club): self
+     public function setConfirmPasswordClub(string $confirm_password_club): self
     {
         $this->confirm_password_club = $confirm_password_club;
 

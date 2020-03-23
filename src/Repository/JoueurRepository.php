@@ -25,10 +25,10 @@ class JoueurRepository extends ServiceEntityRepository
     /*
     public function findByExampleField($value)
     {
-        return $this->createQueryBuilder('j')
-            ->andWhere('j.exampleField = :val')
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.exampleField = :val')
             ->setParameter('val', $value)
-            ->orderBy('j.id', 'ASC')
+            ->orderBy('c.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
@@ -39,8 +39,8 @@ class JoueurRepository extends ServiceEntityRepository
     /*
     public function findOneBySomeField($value): ?Joueur
     {
-        return $this->createQueryBuilder('j')
-            ->andWhere('j.exampleField = :val')
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()

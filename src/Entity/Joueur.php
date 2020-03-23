@@ -3,12 +3,16 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints\EqualTo;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Constraints\EqualTo;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\JoueurRepository")
+ * @UniqueEntity(fields={"email_joueur"},
+ *     message="L'email que vous avez enregistré est dejà utilisé !")
  */
 class Joueur implements UserInterface
 {
@@ -31,20 +35,23 @@ class Joueur implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email()
      */
     private $email_joueur;
 
     /**
      * @ORM\Column(type="string", length=255)
-     
      */
     private $password_joueur;
+
+    private $password;
 
     /**
      * @Assert\EqualTo(propertyPath="password_joueur", message="veuillez entrez le même mot de passe")
      */
     private $confirm_password_joueur;
 
+    
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -111,20 +118,21 @@ class Joueur implements UserInterface
     {
         return $this->confirm_password_joueur;
     }
-
+    
     public function setPasswordJoueur(string $password_joueur): self
     {
         $this->password_joueur = $password_joueur;
 
         return $this;
     }
-
     public function setConfirmPasswordJoueur(string $confirm_password_joueur): self
     {
         $this->confirm_password_joueur = $confirm_password_joueur;
 
         return $this;
     }
+
+    
 
     public function getPaysJoueur(): ?string
     {
@@ -175,6 +183,21 @@ class Joueur implements UserInterface
     /**
      * @see UserInterface
      */
+    public function getPassword(): string
+    {
+        return (string) $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+    
+    /**
+     * @see UserInterface
+     */
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -187,21 +210,6 @@ class Joueur implements UserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
-        return $this;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function getPassword(): string
-    {
-        return (string) $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
 
         return $this;
     }

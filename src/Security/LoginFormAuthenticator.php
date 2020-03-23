@@ -2,7 +2,7 @@
 
 namespace App\Security;
 
-use App\Entity\User;
+use App\Entity\Joueur;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,33 +46,33 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     public function getCredentials(Request $request)
     {
         $credentials = [
-            'email' => $request->request->get('email'),
-            'password' => $request->request->get('password'),
+            'email_joueur' => $request->request->get('email'),
+            'password_joueur' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
             Security::LAST_USERNAME,
-            $credentials['email']
+            $credentials['email_joueur']
         );
 
         return $credentials;
     }
 
-    public function getUser($credentials, UserProviderInterface $userProvider)
+    public function getUser($credentials, UserProviderInterface $joueurProvider)
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
+        $joueur = $this->entityManager->getRepository(Joueur::class)->findOneBy(['email_joueur' => $credentials['email_joueur']]);
 
-        if (!$user) {
+        if (!$joueur) {
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
         }
 
-        return $user;
+        return $joueur;
     }
 
     public function checkCredentials($credentials, UserInterface $user)

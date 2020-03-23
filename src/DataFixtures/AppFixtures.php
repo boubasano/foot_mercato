@@ -19,7 +19,7 @@ class AppFixtures extends Fixture
     {
         
             $user = new User();
-            $user->setEmail('abou@gmail.com');
+            $user->setEmail('bouba@gmail.com');
             $user->setPassword('admin');
              $user->setPassword($this->passwordEncoder->encodePassword(
              $user,
