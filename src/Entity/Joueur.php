@@ -51,8 +51,6 @@ class Joueur implements UserInterface
      */
     private $confirm_password_joueur;
 
-    
-
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -131,8 +129,6 @@ class Joueur implements UserInterface
 
         return $this;
     }
-
-    
 
     public function getPaysJoueur(): ?string
     {

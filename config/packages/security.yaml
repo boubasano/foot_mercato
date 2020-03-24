@@ -1,16 +1,14 @@
 security:
     encoders:
-        App\Entity\Joueur:
-            algorithm: auto
-        App\Entity\Club:
-            algorithm: auto
-        App\Entity\Agent:
-            algorithm: auto
+        
         App\Entity\User:
             algorithm: auto
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_JOUEUR: ROLE_USER
+        ROLE_CLUB: ROLE_USER
+        ROLE_AGENT: ROLE_USER
+        ROLE_ADMIN:      [ROLE_USER, ROLE_JOUEUR]
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
         
@@ -19,8 +17,8 @@ security:
         # used to reload user from session & other features (e.g. switch_user)
         in_database:
             entity:
-                class: App\Entity\Joueur
-                property: email
+                class: App\Entity\User
+                property: 'email'
                 
 
         # used to reload user from session & other features (e.g. switch_user)
@@ -37,7 +35,7 @@ security:
             form_login:     
                 login_path: app_login
                 check_path: app_login
-                default_target_path: default
+                # default_target_path: default
             
             logout:
                 path: app_logout
