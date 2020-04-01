@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Club;
-use App\Form\InscriptionClubType;
+use App\Entity\User;
+use App\Form\InscriptionUserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response; 
@@ -11,49 +11,49 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 // use Symfony\Component\HttpFoundation\RedirectResponse;
 
-// ... permet la validation du formulaire
-
+// ... permet la validation du formulaire si les contraintes sont respectées
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class InscriptionClubController extends AbstractController
+class InscriptionUserController extends AbstractController
 {
     /**
-     * @Route("/club", name="club", methods={"GET","POST"})
+     * @Route("/inscription", name="user", methods={"GET","POST"})
      */
     //
     
-     public function addClub(Request $request, UserPasswordEncoderInterface $encoder): Response
+     public function addUser(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
         
         // j'instencie un nouvel objet qui va contenir les datas en
         // enregistré par l'utilisateur
-        $club = new Club();
+        $user = new User();
         
         // je declare une variable qui va contenir le formumlaire
-        // créé dans InscriptionClubType
-        $form = $this->createForm(InscriptionClubType::class, $club);
+        // créé dans ContactType
+        $form = $this->createForm(InscriptionUserType::class, $user);
         $form->handleRequest($request);
         // $request = Request::createFromGlobals();
 
         
-         
+        //  validation de l'envoi de données et son enregistrement dans la base de données 
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $entityManager = $this->getDoctrine()->getManager();
+            
+            $encoded = $encoder->encodePassword($user, $user->getPassword());
 
-            $encoded = $encoder->encodePassword($club, $club->getPasswordClub());
-
-            $club->setPasswordClub($encoded);
-            $entityManager->persist($club);
+            $user->setPassword($encoded);
+            $entityManager->persist($user);
             $entityManager->flush();
 
-            
+           
         return $this->redirectToRoute('apropos'); 
     }
          
         //create a view
-        return $this->render('inscriptionclub/index.html.twig', [
-            'club' => $club,
+        return $this->render('security/inscription.html.twig', [
+            'user' => $user,
             'form' => $form->createView(),         
         ]);     
     }
@@ -65,15 +65,13 @@ class InscriptionClubController extends AbstractController
     // // }
 
     // this service validates the form and counts messages errors
-
-
-public function club(ValidatorInterface $validator)
+    public function user(ValidatorInterface $validator)
 {
-    $club = new Club();
+    $user = new User();
 
     // ... do something to the $contact object
 
-    $errors = $validator->validate($club);
+    $errors = $validator->validate($user);
 
     if (count($errors) > 0) {
         /*
@@ -88,6 +86,7 @@ public function club(ValidatorInterface $validator)
 
     return new Response('The author is valid! Yes!');
 }
+
 
 }
 

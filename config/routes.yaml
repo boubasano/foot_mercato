@@ -18,17 +18,11 @@
 #    path: /offres
 #    controller: App\Controller\OffresController::index
 
-#joueur:
-#    path: /joueur
-#    controller: App\Controller\InscriptionJoueurController::addJoueur
+#user:
+#    path: /inscription
+#    controller: App\Controller\InscriptionUserController::addUser
 
-#agent:
-#    path: /agent
-#    controller: App\Controller\InscriptionAgentController::addAgent
 
-#club:
-#    path: /club
-#    controller: App\Controller\InscriptionClubController::addClub
 
 #fichesjoueur:
 #    path: /fichesjoueur

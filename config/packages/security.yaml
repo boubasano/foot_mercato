@@ -1,6 +1,11 @@
 security:
     encoders:
-        
+        # App\Entity\Joueur:
+        #     algorithm: auto
+        # App\Entity\Club:
+        #     algorithm: auto
+        # App\Entity\Agent:
+        #     algorithm: auto
         App\Entity\User:
             algorithm: auto
 

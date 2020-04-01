@@ -3,10 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields={"email"},
+ *      message="L'email que vous avez enregistré est dejà utilisé !")
  */
 class User implements UserInterface
 {
@@ -17,6 +21,22 @@ class User implements UserInterface
      */
     private $id_user;
 
+    
+    /**
+     * @ORM\Column(type="string", length=180, unique=false)
+     */
+    private $nom;
+
+    /**
+     * @ORM\Column(type="string", length=180, unique=false)
+     */
+    private $prenom;
+
+    /**
+     * @ORM\Column(type="string", length=180, unique=false)
+     */
+    private $statut;
+
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
@@ -25,17 +45,60 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private $roles;
+    private $roles = [];
 
     /**
-     * @var string The hashed password
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $password;
 
+     /**
+     *  @Assert\EqualTo(propertyPath="password",
+     *                     message="veuillez entrer un mot de passe identique")
+     */
+    private $password_confirm;
+
+
     public function getIdUser(): ?int
     {
         return $this->id_user;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+     public function getStatut(): ?string
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(string $statut): self
+    {
+        $this->statut = $statut;
+
+        return $this;
     }
 
     public function getEmail(): ?string
@@ -90,6 +153,18 @@ class User implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getPasswordConfirm(): string
+    {
+        return (string) $this->password_confirm;
+    }
+
+    public function setPasswordConfirm(string $password_confirm): self
+    {
+        $this->password_confirm = $password_confirm;
 
         return $this;
     }

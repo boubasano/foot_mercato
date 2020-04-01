@@ -3,27 +3,18 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Constraints\EqualTo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ClubRepository")
  */
-class Club implements UserInterface
+class Club 
 {
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id_club;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $nom_club;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -40,36 +31,10 @@ class Club implements UserInterface
      */
     private $continent_club;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email_club;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $password_club;
-
-    /**
-     * @Assert\EqualTo(propertyPath="password_club", message="veuillez entrez le même mot de passe")
-     */
-    private $confirm_password_club;
-
+   
     public function getIdClub(): ?int
     {
         return $this->id_club;
-    }
-
-    public function getNomClub(): ?string
-    {
-        return $this->nom_club;
-    }
-
-    public function setNomClub(string $nom_club): self
-    {
-        $this->nom_club = $nom_club;
-
-        return $this;
     }
 
     public function getPaysClub(): ?string
@@ -108,100 +73,64 @@ class Club implements UserInterface
         return $this;
     }
 
-    public function getEmailClub(): ?string
-    {
-        return $this->email_club;
-    }
+//     /**
+//      * A visual identifier that represents this user.
+//      *
+//      * @see UserInterface
+//      */
+//     public function getUsername(): string
+//     {
+//         return (string) $this->email;
+//     }
 
-    public function setEmailClub(string $email_club): self
-    {
-        $this->email_club = $email_club;
+//     /**
+//      * @see UserInterface
+//      */
+//     public function getRoles(): array
+//     {
+//         $roles = $this->roles;
+//         // guarantee every user at least has ROLE_USER
+//         $roles[] = 'ROLE_USER';
 
-        return $this;
-    }
+//         return array_unique($roles);
+//     }
 
-    public function getPasswordClub(): ?string
-    {
-        return $this->password_club;
-    }
+//     public function setRoles(array $roles): self
+//     {
+//         $this->roles = $roles;
 
-     public function getConfirmPasswordClub(): ?string
-    {
-        return $this->confirm_password_club;
-    }
+//         return $this;
+//     }
 
-    public function setPasswordClub(string $password_club): self
-    {
-        $this->password_club = $password_club;
+//     /**
+//      * @see UserInterface
+//      */
+//     public function getPassword(): string
+//     {
+//         return (string) $this->password;
+//     }
+// // 
+//     public function setPassword(string $password): self
+//     {
+//         $this->password = $password;
 
-        return $this;
-    }
+//         return $this;
+//     }
 
-     public function setConfirmPasswordClub(string $confirm_password_club): self
-    {
-        $this->confirm_password_club = $confirm_password_club;
+//     /**
+//      * @see UserInterface
+//      */
+//     public function getSalt()
+//     {
+//         // not needed when using the "bcrypt" algorithm in security.yaml
+//     }
 
-        return $this;
-    }
-
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUsername(): string
-    {
-        return (string) $this->email;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function getPassword(): string
-    {
-        return (string) $this->password;
-    }
-// 
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function getSalt()
-    {
-        // not needed when using the "bcrypt" algorithm in security.yaml
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials()
-    {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
-    }
+//     /**
+//      * @see UserInterface
+//      */
+//     public function eraseCredentials()
+//     {
+//         // If you store any temporary, sensitive data on the user, clear it here
+//         // $this->plainPassword = null;
+//     }
 }
