@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200327202751 extends AbstractMigration
+final class Version20200424080616 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -38,7 +38,7 @@ final class Version20200327202751 extends AbstractMigration
         $this->addSql('CREATE TABLE sante_joueur (id_santejoueur INT AUTO_INCREMENT NOT NULL, renseignement_santejoueur VARCHAR(255) NOT NULL, player_id INT NOT NULL, PRIMARY KEY(id_santejoueur)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE statistiques_joueur (id_statistiquesjoueur INT AUTO_INCREMENT NOT NULL, media VARCHAR(255) NOT NULL, statistiques VARCHAR(255) NOT NULL, player_id INT NOT NULL, PRIMARY KEY(id_statistiquesjoueur)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE statut (id_statut INT AUTO_INCREMENT NOT NULL, statut VARCHAR(255) NOT NULL, player_id INT NOT NULL, agent_id INT NOT NULL, centre_id INT NOT NULL, PRIMARY KEY(id_statut)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE user (id_user INT AUTO_INCREMENT NOT NULL, nom VARCHAR(180) NOT NULL, prenom VARCHAR(180) NOT NULL, statut VARCHAR(180) NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id_user)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE user (id_user INT AUTO_INCREMENT NOT NULL, nom VARCHAR(180) NOT NULL, prenom VARCHAR(180) NOT NULL, statut VARCHAR(180) NOT NULL, email VARCHAR(180) NOT NULL, roles VARCHAR(255) NOT NULL, password TINYTEXT NOT NULL COMMENT \'(DC2Type:array)\', UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id_user)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
     }
 
     public function down(Schema $schema) : void

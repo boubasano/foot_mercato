@@ -44,6 +44,7 @@ class InscriptionUserController extends AbstractController
             $encoded = $encoder->encodePassword($user, $user->getPassword());
 
             $user->setPassword($encoded);
+            
             $entityManager->persist($user);
             $entityManager->flush();
 
