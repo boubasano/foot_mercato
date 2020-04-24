@@ -41,7 +41,7 @@ security:
             
             logout:
                 path: app_logout
-                target: login
+                target: app_login
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
