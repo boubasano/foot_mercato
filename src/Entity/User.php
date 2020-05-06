@@ -65,6 +65,28 @@ class User implements UserInterface
         return $this->id_user;
     }
 
+    public function id_user(): ?int
+    {
+        return $this->id_user;
+    }
+
+    public function get_iduser(): ?int
+    {
+        return $this->id_user;
+    }
+
+    public function isid_user(): ?int
+    {
+        return $this->id_user;
+    }
+
+    public function hasid_user(): ?int
+    {
+        return $this->id_user;
+    }
+
+
+
     public function getNom(): ?string
     {
         return $this->nom;
