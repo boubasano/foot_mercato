@@ -75,6 +75,13 @@ class User implements UserInterface
         return $this->id_user;
     }
 
+    public function set_iduser(int $id_user): self
+    {
+        $this->id_user = $id_user;
+
+        return $this;
+    }
+
     public function isid_user(): ?int
     {
         return $this->id_user;

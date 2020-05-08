@@ -4,3 +4,14 @@ easy_admin:
       #  - App\Entity\Joueur
       #  - App\Entity\Agent
        - App\Entity\User
+   site_name: FOOT MERCATO
+
+   user:
+        display_name: true
+        display_avatar: false
+        name_property_path: 'fullName'
+
+   design:
+        brand_color: '#1ABC9C'
+
+      
