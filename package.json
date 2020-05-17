@@ -1,16 +1,34 @@
 {
-    "devDependencies": {
-        "@symfony/webpack-encore": "^0.28.2",
-        "core-js": "^3.0.0",
-        "regenerator-runtime": "^0.13.2",
-        "webpack-notifier": "^1.6.0"
-    },
-    "license": "UNLICENSED",
-    "private": true,
-    "scripts": {
-        "dev-server": "encore dev-server",
-        "dev": "encore dev",
-        "watch": "encore dev --watch",
-        "build": "encore production --progress"
-    }
+  "devDependencies": {
+    "@symfony/webpack-encore": "^0.28.2",
+    "core-js": "^3.0.0",
+    "gulp": "^4.0.2",
+    "regenerator-runtime": "^0.13.2",
+    "webpack-notifier": "^1.6.0"
+  },
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build": "encore production --progress"
+  },
+  "name": "foot_mercato",
+  "version": "1.0.0",
+  "main": "webpack.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boubasano/foot_mercato.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/boubasano/foot_mercato/issues"
+  },
+  "homepage": "https://github.com/boubasano/foot_mercato#readme",
+  "description": ""
 }
