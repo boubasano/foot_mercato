@@ -1,4 +1,4 @@
-{% extends 'adminbase.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Hello UserController!{% endblock %}
 
@@ -7,28 +7,15 @@
 
 {# {{ form(form) }} #}
 {# personnalisation de formulaire #}
+{# {{ form_start(form) }}
+    
+        {{ form_errors(form) }}  
+        {{ form_row(form.title, {'label':'Situation actuelle', 'attr':
+                                    {'placeholder':'Libre ou engagé'}}) }}
 
+{{ form_end(form) }} #}
 {{ form_start(form) }}
     
-        {# {{ form_errors(form) }}  
-        {{ form_row(form.nom, {'label':'Nom', 'attr':
-                                    {'placeholder':'Nom...'}}) }}           
-        {{ form_row(form.prenom, {'label':'Prenom', 'attr':
-                                    {'placeholder':'Prenom...'}}) }}    
-        {{ form_row(form.email, {'label':'Email', 'attr':
-                                    {'placeholder':'Email...'}}) }}
-        {{ form_row(form.password, {'label':'Mot de passe', 'attr':
-                                    {'placeholder':'Mot de passe...'}}) }}
-         {{ form_row(form.confirm_password, {'label':'Confirmez Mot de passe', 'attr':
-                                    {'placeholder':'Confirmez mot de passe...'}}) }}
-        {{ form_row(form.pays, {'label':'Pays', 'attr':
-                                    {'placeholder':'Pays...'}}) }}            
-        {{ form_row(form.ville, {'label':'Ville', 'attr':
-                                    {'placeholder':'Ville...'}}) }}           
-        {{ form_row(form.continent, {'label':'Continent', 'attr':
-                                    {'placeholder':'Continent...'}}) }}  
-        {{ form_row(form.statut, {'label':'Statut', 'attr':
-                                    {'placeholder':'Statut'}}) }} #}
 
         
       {{ form_widget(form) }} 

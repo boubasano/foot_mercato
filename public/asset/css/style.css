@@ -9,7 +9,7 @@
 
  html, footer {
   margin: 0;
-  background: #99a8b7;
+  background: blue;
 }
 
 .bd-img {
@@ -44,7 +44,7 @@
 footer {
   padding-top: 3rem;
   padding-bottom: 3rem;
-  color: #212529;
+  color: blue;
 }
 
 footer p {

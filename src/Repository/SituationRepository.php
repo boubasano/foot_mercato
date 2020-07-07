@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Statut;
+use App\Entity\Situation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Statut|null find($id, $lockMode = null, $lockVersion = null)
- * @method Statut|null findOneBy(array $criteria, array $orderBy = null)
- * @method Statut[]    findAll()
- * @method Statut[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Situation|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Situation|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Situation[]    findAll()
+ * @method Situation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class StatutRepository extends ServiceEntityRepository
+class SituationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Statut::class);
+        parent::__construct($registry, Situation::class);
     }
 
     // /**
-    //  * @return Statut[] Returns an array of Statut objects
+    //  * @return Situation[] Returns an array of Situation objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class StatutRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Statut
+    public function findOneBySomeField($value): ?Situation
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.exampleField = :val')

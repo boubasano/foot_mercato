@@ -3,61 +3,49 @@
 namespace App\Controller;
 
 use App\Entity\Situation;
-use App\Entity\User;
-use App\Form\InscriptionUserType;
 use App\Form\SituationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response; 
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response; 
+use Symfony\Component\HttpFoundation\Request;
 // use Symfony\Component\HttpFoundation\RedirectResponse;
 
 // ... permet la validation du formulaire si les contraintes sont respectées
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class InscriptionUserController extends AbstractController
+class SituationController extends AbstractController
 {
-
-    /**
-     * @Route("/inscription", name="user", methods={"GET","POST"})
+    
+     /**
+     * @Route("/situation", name="situation", methods={"GET","POST"})
      */
     //
     
-     public function addUser(Request $request, UserPasswordEncoderInterface $encoder): Response
+     public function addSituation(Request $request): Response
     {
         
         // j'instencie un nouvel objet qui va contenir les datas en
         // enregistré par l'utilisateur
-        $user = new User();
+        $situation = new Situation();
         
         // je declare une variable qui va contenir le formumlaire
         // créé dans ContactType
-        $form = $this->createForm(InscriptionUserType::class, $user);
+        $form = $this->createForm(SituationType::class, $situation);
         $form->handleRequest($request);
         // $request = Request::createFromGlobals();
 
-        
-        //  validation de l'envoi de données et son enregistrement dans la base de données 
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
             $entityManager = $this->getDoctrine()->getManager();
-            
-            $encoded = $encoder->encodePassword($user, $user->getPassword());
-
-            $user->setPassword($encoded);
-            
-            $entityManager->persist($user);
+            $entityManager->persist($situation);
             $entityManager->flush();
 
-           
-        return $this->redirectToRoute('app_login'); 
+        return $this->redirectToRoute('user'); 
     }
          
         //create a view
-        return $this->render('security/inscription.html.twig', [
-            'user' => $user,
+        return $this->render('situation/index.html.twig', [
+            'situation' => $situation,
             'form' => $form->createView(),         
         ]);     
     }
@@ -69,13 +57,15 @@ class InscriptionUserController extends AbstractController
     // // }
 
     // this service validates the form and counts messages errors
-    public function user(ValidatorInterface $validator)
+
+
+    public function situation(ValidatorInterface $validator)
 {
-    $user = new User();
+    $situation = new Situation();
 
     // ... do something to the $contact object
 
-    $errors = $validator->validate($user);
+    $errors = $validator->validate($situation);
 
     if (count($errors) > 0) {
         /*
@@ -90,7 +80,6 @@ class InscriptionUserController extends AbstractController
 
     return new Response('The author is valid! Yes!');
 }
-
 
 }
 

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SituationController!{% endblock %}
+
+{% block body %}
+<h1>situation du joueur</h1>
+{# {{ form(form) }} #}
+{# personnalisation de formulaire #}
+
+{{ form_start(form) }}
+    
+        {{ form_errors(form) }}  
+        {{ form_row(form.title, {'label':'Situation actuelle', 'attr':
+                                    {'placeholder':'Libre ou engagé'}}) }}           
+       
+                   
+{{ form_end(form) }}
+{% endblock %}

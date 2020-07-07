@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200506130318 extends AbstractMigration
+final class Version20200626110353 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -35,10 +35,10 @@ final class Version20200506130318 extends AbstractMigration
         $this->addSql('CREATE TABLE objectif_joueur (id_objectifjoueur INT AUTO_INCREMENT NOT NULL, objectif VARCHAR(255) NOT NULL, player_id INT NOT NULL, PRIMARY KEY(id_objectifjoueur)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE physique_joueur (id_physiquejoueur INT AUTO_INCREMENT NOT NULL, taille VARCHAR(255) NOT NULL, poids VARCHAR(255) NOT NULL, corpulence VARCHAR(255) NOT NULL, player_id INT NOT NULL, PRIMARY KEY(id_physiquejoueur)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE profession_joueur (id_professionjoueur INT AUTO_INCREMENT NOT NULL, intitule_professionjoueur VARCHAR(255) NOT NULL, player_id INT NOT NULL, PRIMARY KEY(id_professionjoueur)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE sante_joueur (id_santejoueur INT AUTO_INCREMENT NOT NULL, renseignement_santejoueur VARCHAR(255) NOT NULL, player_id INT NOT NULL, PRIMARY KEY(id_santejoueur)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE situation (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE statistiques_joueur (id_statistiquesjoueur INT AUTO_INCREMENT NOT NULL, media VARCHAR(255) NOT NULL, statistiques VARCHAR(255) NOT NULL, player_id INT NOT NULL, PRIMARY KEY(id_statistiquesjoueur)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE statut (id_statut INT AUTO_INCREMENT NOT NULL, statut VARCHAR(255) NOT NULL, player_id INT NOT NULL, agent_id INT NOT NULL, centre_id INT NOT NULL, PRIMARY KEY(id_statut)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE user (id_user INT AUTO_INCREMENT NOT NULL, nom VARCHAR(180) NOT NULL, prenom VARCHAR(180) NOT NULL, statut VARCHAR(180) NOT NULL, email VARCHAR(180) NOT NULL, roles LONGTEXT DEFAULT NULL COMMENT \'(DC2Type:array)\', password TINYTEXT NOT NULL COMMENT \'(DC2Type:array)\', UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id_user)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE user (id_user INT AUTO_INCREMENT NOT NULL, situation INT NOT NULL, nom VARCHAR(180) NOT NULL, prenom VARCHAR(180) NOT NULL, statut VARCHAR(180) NOT NULL, email VARCHAR(180) NOT NULL, roles LONGTEXT NOT NULL COMMENT \'(DC2Type:array)\', password TINYTEXT NOT NULL COMMENT \'(DC2Type:array)\', INDEX IDX_8D93D649EC2D9ACA (situation), PRIMARY KEY(id_user)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE user ADD CONSTRAINT FK_8D93D649EC2D9ACA FOREIGN KEY (situation) REFERENCES situation (id)');
     }
 
     public function down(Schema $schema) : void
@@ -46,6 +46,7 @@ final class Version20200506130318 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
+        $this->addSql('ALTER TABLE user DROP FOREIGN KEY FK_8D93D649EC2D9ACA');
         $this->addSql('DROP TABLE agent');
         $this->addSql('DROP TABLE annonce_agent');
         $this->addSql('DROP TABLE annonce_club');
@@ -59,9 +60,8 @@ final class Version20200506130318 extends AbstractMigration
         $this->addSql('DROP TABLE objectif_joueur');
         $this->addSql('DROP TABLE physique_joueur');
         $this->addSql('DROP TABLE profession_joueur');
-        $this->addSql('DROP TABLE sante_joueur');
+        $this->addSql('DROP TABLE situation');
         $this->addSql('DROP TABLE statistiques_joueur');
-        $this->addSql('DROP TABLE statut');
         $this->addSql('DROP TABLE user');
     }
 }

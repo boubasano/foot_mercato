@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Repository\UserRepository;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -38,12 +39,12 @@ class User implements UserInterface
     private $statut;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=180, unique=false)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="array", nullable=false)
      */
     private $roles= [];
 
@@ -58,6 +59,12 @@ class User implements UserInterface
      *                     message="veuillez entrer un mot de passe identique")
      */
     private $password_confirm;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Situation::class, inversedBy="joueurs")
+     * @ORM\JoinColumn(name="situation", referencedColumnName="id",  nullable=true)
+     */
+    private $situation;
 
 
     public function getIdUser(): ?int
@@ -213,5 +220,17 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getSituation(): ?Int
+    {
+        return $this->situation;
+    }
+
+    public function setSituation(?Situation $situation): self
+    {
+        $this->situation = $situation;
+
+        return $this;
     }
 }
